@@ -70,7 +70,6 @@ var Generator = function (matrix, lookback) {
         var trail = initTrail(lookback);
         var selections = [];
 
-        var graceful = false;
         while (selections.length < maxLength || !maxLength) {
             // trim the trail
             while (trail.length > lookback - 1) {
@@ -92,7 +91,6 @@ var Generator = function (matrix, lookback) {
             var choice = util.weightedChoice(values, sums);
             // if it's the end keyword, call the word over - otherwise add and continue
             if (choice == END) {
-                graceful = true;
                 break;
             } else {
                 selections.push(choice);
@@ -101,7 +99,6 @@ var Generator = function (matrix, lookback) {
         }
 
         var result = selections.join("");
-        result.graceful = graceful;
         return result;
     };
 
